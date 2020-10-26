@@ -126,6 +126,7 @@ export default {
         for(let i = 0 ; i < this.uploader.length; i++){
           const res = await mineApi.upload(values.uploader[i].file)
           this.code = res.code
+          this.$toast(res.msg)
         }
       }
     },
@@ -143,7 +144,10 @@ export default {
     },
     async upgradeService(images){
       const res = await assetsApi.upgradeService(this.inputval, this.file)
-      this.msgbox = true;
+      this.$toast(res.msg)
+      setTimeout(()=>{
+        this.$router.push({path:'/mine'})
+      },1000)
     },
     async upload(e){
 　　　　let inputDOM = this.$refs.inputer;

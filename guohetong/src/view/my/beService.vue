@@ -37,7 +37,7 @@
           <div class="payimg">
             <img :src="alipay_image" alt="">
           </div>
-          <div class="clickbtn">点击放大</div>
+          <!-- <div class="clickbtn">点击放大</div> -->
         </div>
       </div>
 
@@ -54,7 +54,7 @@
           <div class="payimg">
             <img :src="wechat_image" alt="">
           </div>
-          <div class="clickbtn">点击放大</div>
+          <!-- <div class="clickbtn">点击放大</div> -->
         </div>
       </div>
 
@@ -81,7 +81,7 @@
     <div class="msgbox" v-show = "msgbox">
       <div class="msg">
         <span>申请成功</span>
-        <button @click="changeStyle()">确定</button>
+        <van-button @click="changeStyle()">确定</van-button>
       </div>
     </div>
     <tab-bar></tab-bar>
@@ -145,6 +145,7 @@ export default {
         for(let i = 0 ; i < this.uploader.length; i++){
           const res = await mineApi.upload(values.uploader[i].file)
           this.code = res.code
+          this.$toast(res.msg)
         }
       }
     },
@@ -156,17 +157,21 @@ export default {
     },
     async apply(type, image){
       if(this.ProductActive == "服务中心"){
-        const res = await assetsApi.apply(1, this.picPath)
+        const res = await assetsApi.apply(1, this.uploader)
+        this.$toast(res.msg)
       }else{
-        const res = await assetsApi.apply(2, this.picPath)
+        const res = await assetsApi.apply(2, this.uploader)
+        this.$toast(res.msg)
       }
     },
     changeStyle(){
-      this.msgbox = false;
-      this.$router.push({path:'/mine'})
-      setTimeout(()=>{
-        this.$router.push({path:'/beService'})
-      }, 1000)
+      this.$toast("111")
+      console.log(123)
+      // this.msgbox = false;
+      // this.$router.push({path:'/mine'})
+      // setTimeout(()=>{
+      //   this.$router.push({path:'/beService'})
+      // }, 1000)
     },
     shangc(e) {
       let files = document.getElementById("id").files[0];

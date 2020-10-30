@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="服务中心/加盟店"></nav-bar>
+    <nav-bar id="reset" title="服务中心/加盟店"></nav-bar>
     <div v-if="account.service_level">
       <div class="link-box" @click="register">
         <div class="flex-box">
@@ -74,6 +74,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

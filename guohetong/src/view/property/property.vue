@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <nav-bar title="我的资产"></nav-bar>
+    <nav-bar id="reset" title="我的资产"></nav-bar>
     <div class="property-box">
       <div class="property-content">
         <span class="iconfont iconemizhongzi marginR2 color1"></span>
@@ -208,4 +208,7 @@ export default {
 .link-box{
   margin: .2rem .2rem;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <nav-bar title="服务中心/加盟店"></nav-bar>
+    <nav-bar id="reset" title="服务中心/加盟店"></nav-bar>
     <div class="middle">
       <div class="upbox">
         <div class="up">
@@ -412,4 +412,7 @@ export default {
       padding: 2rem 0;
       background: rgba(0,0,0,0.3);
     }
+    #reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

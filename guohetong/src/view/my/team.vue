@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="我的团队"></nav-bar>
+    <nav-bar id="reset" title="我的团队"></nav-bar>
     <div class="num-box">
       <span>直推人数：{{ invite_num }}</span>
       <span>团队人数：{{ team_num }}</span>
@@ -118,4 +118,7 @@ export default {
   padding: 0.2rem;
   background: #fff;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="订单详情"></nav-bar>
+    <nav-bar id="reset" title="订单详情"></nav-bar>
 
     <div class="order-list-box">
       <div class="list-box-top">
@@ -252,4 +252,7 @@ export default {
  .content {
     padding: 16px 16px 160px;
   }
+  #reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

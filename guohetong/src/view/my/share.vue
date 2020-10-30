@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="我要分享"></nav-bar>
+    <nav-bar id="reset" title="我要分享"></nav-bar>
     <div class="font28 margin2">我分享的二维码</div>
     <div id="qrcode" class="flex-box-center"></div>
     <div class="flex-box width96">
@@ -57,4 +57,7 @@ export default {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

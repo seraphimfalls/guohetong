@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="资金流水"></nav-bar>
+    <nav-bar id="reset" title="资金流水"></nav-bar>
     <van-tabs v-model="activeName" @click="onClick">
       <van-tab title="报单资金" name="1">
         <blance-data></blance-data>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       activeName: "1"
-    };
+    }
   },
   async created() {
     if (this.$route.query.active) {
@@ -38,9 +38,14 @@ export default {
     }
   },
   methods: {
-    onClick(name) {}
+    onClick(name) {
+      
+    }
   }
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

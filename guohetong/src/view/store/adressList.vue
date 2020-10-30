@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="收货地址列表"></nav-bar>
+    <nav-bar id="reset" title="收货地址列表"></nav-bar>
     <div class="bottom-box">
       <van-swipe-cell v-for="item in list" :key="item.id">
         <div class="width96 flex-box-between border-bottom2">
@@ -148,4 +148,7 @@ export default {
 .btn_box{
   width: 2.5rem !important;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

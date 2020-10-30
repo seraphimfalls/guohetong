@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="接点关系网"></nav-bar>
+    <nav-bar id="reset" title="会员报单"></nav-bar>
     <div class="num-box">
       <span>直推人数：{{ invite_num }}</span>
       <span>团队人数：{{ team_num }}</span>
@@ -222,4 +222,7 @@ export default {
   padding-bottom: 0.1rem;
   line-height: 2em;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="我的订单"></nav-bar>
+    <nav-bar id="reset" title="我的订单"></nav-bar>
     <van-tabs v-model="active"  class="font28">
       <van-tab v-for="tab in tabList" :title="tab.name" :name="tab.id" :key="tab.id">
         <order-list :listType="active"></order-list>
@@ -58,4 +58,7 @@ export default {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

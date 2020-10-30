@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <nav-bar title="收益资金提现"></nav-bar>
+    <nav-bar id="reset" title="收益资金提现"></nav-bar>
     <div class="blance-box">
       <div class="flex-box">
         <span class="iconfont iconemizhongzi marginR2 colorfabd02"></span>
@@ -114,4 +114,7 @@ export default {
     width: 100%;
     overflow-y: auto;
   }
+  #reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

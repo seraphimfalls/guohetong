@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="账户安全"></nav-bar>
+    <nav-bar id="reset" title="账户安全"></nav-bar>
     <van-tabs v-model="active">
       <van-tab title="修改登录密码">
         <div class="width96 font28 margin2 flex-box-between border-bottom2">
@@ -133,4 +133,7 @@ async created() {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

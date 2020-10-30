@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="特卖活动"></nav-bar>
+    <nav-bar id="reset" title="特卖活动"></nav-bar>
     <van-tabs v-model="activeName" @click="onClick" class="font28">
       <van-tab v-for="tab in tabList" :title="tab.name" :name="tab.id" :key="tab.id">
 
@@ -35,4 +35,7 @@ async created() {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

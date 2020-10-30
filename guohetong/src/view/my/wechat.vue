@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="设置微信账户"></nav-bar>
+    <nav-bar id="reset" title="设置微信账户"></nav-bar>
     <div class="width96 font28 margin2 flex-box-between border-bottom2">
       <span>微信账户</span>
       <van-field type="text" style="width:78%" v-model="wx_account" placeholder="请输入微信账号" />
@@ -52,4 +52,7 @@ async created() {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -30,22 +30,19 @@
 <!--      <span class="coloraeaeae">更多</span>-->
     </div>
     <div class="bottom-box">
-      <div class="list-box" v-for="item in listData" :key="item.id" @click="detail(item.id)">
+      <div class="list-box" v-for="item in listData" :key="item.id" @click="getDetail(item.id)">
         <div class="product-img">
           <img :src="item.image"/>
         </div>
-        <div class="porduce-detail">
-          <div>
-            <div class="van-multi-ellipsis--l2 textLeft pro-title">{{ item.title }}</div>
-            <div class="flex-box-between textLeft">
-              <div>
-                <p>
-                  <span class="pro-price colorff4b4b">&yen;{{ item.price }}</span>
-                </p>
-              </div>
+        <div class="d_box" style="width:80%">
+          <div class="van-multi-ellipsis--l2 textLeft">{{ item.title }}</div>
+          <div class="flex-box-between textLeft">
+            <div>
+              <span class="colorff4b4b">￥{{ item.price }}</span><br/>
+              <span class="msg_box">{{item.tips}}</span>
             </div>
+            <van-button class="btn" color="#59a4fe" size="small">购买</van-button>
           </div>
-          <van-button class="pro-btn" color="#59a4fe" size="small">购买</van-button>
         </div>
       </div>
     </div>
@@ -57,6 +54,7 @@ import tabBar from "../../components/tabBar.vue";
 import * as homeApi from "../../axios/home.js";
 import * as mineApi from "../../axios/mine.js";
 import * as storage from "../../utils/storage.js";
+import * as storeApi from "../../axios/store.js"
 import F2 from "@antv/f2";
 import {Dialog} from "vant";
 
@@ -89,7 +87,7 @@ export default {
       show: false,
       checked: false,
       isSigned: false,
-      signText: "每日签到"
+      signText: "每日签到",
     };
   },
   async created() {
@@ -107,13 +105,13 @@ export default {
     this.noticeData = noticeRes.data.data;
     // console.log(this.noticeData);
     const getRes = await mineApi.getAccount();
-    // console.log(getRes)
     this.can_transfer = getRes.data.can_transfer;
     this.id = getRes.data.id;
     this.mobile = getRes.data.mobile;
     this.is_merchant = getRes.data.is_merchant;
+    
 
-    const productRes = await homeApi.getRecommendGoodsList();
+    const productRes = await storeApi.getRecommendGoodsList();
     this.listData = productRes.data;
     // console.log(this.listData)
     // const priceRes = await homeApi.getPIGEPrice();
@@ -151,7 +149,6 @@ export default {
     renderChart(priceList) {
       // console.log(priceList);
       const chartEle = this.$refs.chart_trade;
-
       if (!chartEle) {
         return;
       }
@@ -399,49 +396,109 @@ export default {
 }
 
 
-.bottom-box {
-  padding-bottom: 0.98rem;
-  .list-box{
-    height:1.8rem;
-    width: 90%;
-    margin: 0.2rem auto;
-    display: flex;
-    font-size: 0.24rem;
-    line-height: 1.8em;
-    border: 1px solid #B0C4DE;
-    padding: 0.2rem 0.4rem;
-    overflow:hidden;
-    display:flex;
-    justify-content:flex-start;
-    .product-img{
-      width:1.8rem;
-      height:1.8rem;
-      img{
-        width:100%;
-        height:100%;
-        vertical-align: middle;
-      }
-    }
-    .porduce-detail{
-      margin-left:0.3rem;
-      display:flex;
-      width:65%;
-      justify-content:space-between;
-      .pro-title{
-        font-size:0.4rem;
-        font-weight:400;
-      }
-      .pro-price{
-        font-size:0.3rem;
-      }
-      .pro-btn{
-        margin-top:auto;
-        border-radius:0.2rem;
-      }
-    }
-  }
+.btn{
+  border-radius:0.2rem;
+}
+.lbimg {
+  width: 100%;
+  height: 4rem;
 }
 
+.icon-box1 {
+  background: #6cc49f;
+}
+
+.icon-box2 {
+  background: #69b6e5;
+}
+
+.icon-box3 {
+  background: #ffd86d;
+}
+
+.icon-box4 {
+  background: #ff906d;
+}
+
+.icon-text {
+  text-align: left;
+  line-height: 1.8em;
+  font-size: 0.26rem;
+}
+
+.five-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0.2rem auto;
+}
+
+.five-icon {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 40%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+}
+
+.five-icon .iconfont {
+  font-size: 0.48rem;
+}
+
+.five-icon-text {
+  width: 100%;
+  margin: 0.1rem auto;
+  font-size: 0.28rem;
+}
+
+.list-box {
+  width: 90%;
+  margin: 0.3rem auto;
+  display: flex;
+  font-size: 0.24rem;
+  line-height: 1.8em;
+  // border: 1px solid #B0C4DE;
+  padding: 0.2rem 0.4rem;
+  background: rgba(245,245,245,0.4);
+  border-radius: .2rem;
+}
+
+.product-img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.2rem;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.1rem;
+}
+
+.bottom-box {
+  padding-bottom: 0.98rem;
+}
+
+.sign-img {
+  width: 7.5rem;
+  height: 2.1rem;
+  margin: 0.2rem auto;
+}
+.body{
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.msg_box{
+  font-size: 0.2rem;
+  color: rgba(0,0,0,.5);
+}
 .sign-img {
   width: 7.5rem;
   height: 2.1rem;

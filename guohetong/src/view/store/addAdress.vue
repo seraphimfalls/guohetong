@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="新增/编辑地址"></nav-bar>
+    <nav-bar id="reset" title="新增/编辑地址"></nav-bar>
     <van-cell-group class="width96 font28">
       <van-field v-model="receiver_name" label="收货人" placeholder="请输入收货人姓名" />
       <van-field v-model="tel" label="联系方式" placeholder="请输入联系方式" />
@@ -78,4 +78,7 @@ export default {
 .width96 /deep/ .van-field__label{
   margin-right:0.2rem;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

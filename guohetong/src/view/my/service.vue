@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="联系客服"></nav-bar>
+    <nav-bar id="reset" title="联系客服"></nav-bar>
     <div class="width96 font28 margin2 flex-box-between border-bottom2">
       <span>客服微信号：</span>
       <van-field v-model="value" style="width:70%" />
@@ -40,4 +40,7 @@ export default {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

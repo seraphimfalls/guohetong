@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="商品详情"></nav-bar>
+    <nav-bar id="reset" title="商品详情"></nav-bar>
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img class="lbimg" v-lazy="image" />
@@ -105,4 +105,7 @@ export default {
   width: 100%;
   height: 0.98rem;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

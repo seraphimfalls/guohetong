@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="商品分类"></nav-bar>
+    <nav-bar id="reset" title="商品分类"></nav-bar>
     <van-tabs v-model="activeName" @click="onClick">
       <van-tab v-for="tab in tabList" :title="tab.name" :name="tab.id" :key="tab.id">
         <goods-list :listType="activeName"></goods-list>
@@ -63,4 +63,7 @@ async created() {
   height: 2.1rem;
   margin: 0.2rem auto;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <nav-bar title="申请升级为加盟店"></nav-bar>
+    <nav-bar id="reset" title="申请升级为加盟店"></nav-bar>
     <div class="middle">
     <div class="current-box">
         <div class="cur-level">应支付升级费用：{{this.balance}}</div>
@@ -364,4 +364,7 @@ export default {
       text-align: center;
       margin-left: 33%;
     }
+    #reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

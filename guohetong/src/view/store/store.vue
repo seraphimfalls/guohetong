@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <nav-bar title="商城"></nav-bar>
+    <nav-bar id="reset" title="商城"></nav-bar>
     <div class="bottom-box">
       <div class="list-box" v-for="item in listData" :key="item.id" @click="getDetail(item.id)">
         <div class="product-img">
@@ -10,7 +10,8 @@
           <div class="van-multi-ellipsis--l2 textLeft">{{ item.title }}</div>
           <div class="flex-box-between textLeft">
             <div>
-              <span class="colorff4b4b">￥{{ item.price }}</span>
+              <span class="colorff4b4b">￥{{ item.price }}</span><br/>
+              <span class="msg_box">{{item.tips}}</span>
             </div>
             <van-button class="btn" color="#59a4fe" size="small">购买</van-button>
           </div>
@@ -36,13 +37,12 @@ export default {
       listData: [],
       page: 1,
       limit: 10,
-      price: ""
+      price: "",
     };
   },
   async created() {
     const res = await storeApi.getGoodsList(this.page, this.limit)
     this.listData = res.data
-    const res2 = await storeApi.getRecommendGoodsList();
   },
   methods: {
     sort() {
@@ -164,4 +164,11 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
 }
+.msg_box{
+  font-size: 0.2rem;
+  color: rgba(0,0,0,.5);
+}
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

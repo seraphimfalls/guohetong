@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="订单支付"></nav-bar>
+    <nav-bar id="reset" title="订单支付"></nav-bar>
     <div class="width96 font28 line-height2 padding-left2 bgf7f7f7 textLeft">
       <h5>订单信息</h5>
     </div>
@@ -109,4 +109,7 @@ export default {
   width: 100%;
   height: 0.98rem;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="提现地址"></nav-bar>
+    <nav-bar id="reset" title="提现地址"></nav-bar>
     <div class="link-box border-bottom2">
       <span>支付宝</span>
       <div class="flex-box" @click="alipay">
@@ -81,4 +81,7 @@ export default {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <nav-bar title="我的订单"></nav-bar>
+    <nav-bar id="reset" title="充值"></nav-bar>
     <div class="middle">
     <div class="current-box">
         <div class="cur-level">当前报单资金余额：{{this.balance}}</div>
@@ -398,4 +398,7 @@ export default {
       padding: 2rem 0;
       background: rgba(0,0,0,0.3);
     }
+    #reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="提现账户"></nav-bar>
+    <nav-bar id="reset" title="提现账户"></nav-bar>
     
     <div class="width96 font28 margin2 flex-box-between border-bottom2">
       <span>银行卡号</span>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="设置银行卡账户"></nav-bar>
+    <nav-bar id="reset" title="设置银行卡账户"></nav-bar>
    <div class="width96 font28 margin2 flex-box-between border-bottom2">
       <span>所属银行</span>
       <van-field type="text" style="width:78%" v-model="bank_name" placeholder="请输入银行名称" />
@@ -59,4 +59,7 @@ async created() {
 };
 </script>
 <style lang="less" scope>
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

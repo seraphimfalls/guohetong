@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="商品详情"></nav-bar>
+    <nav-bar id="reset" title="商品详情"></nav-bar>
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img class="lbimg" v-lazy="image" />
@@ -9,6 +9,7 @@
     <div class="width96 font28 textLeft font600 border-bottom2">{{title}}</div>
     <div class="width96 textLeft flex-box border-bottom2">
       <span class="colorca0505 font36 marginR2">售价：{{price}}</span>
+      <span class="msg_box" v-show="tips">复消商品5折购买</span>
     </div>
     <div class="brief-box border-bottom2">
       <h4>商品简介</h4>
@@ -42,7 +43,8 @@ export default {
       tohtml: "",
       brief: "",
       isActive:true,
-      id:""
+      id:"",
+      tips:false
     };
   },
   async created() {
@@ -57,6 +59,11 @@ export default {
       this.tips = res.data.tips;
       this.tohtml = res.data.content;
       this.brief = res.data.brief;
+      if(res.data.tips){
+        this.tips = true
+      }else{
+        this.tips = false
+      }
     }else{
       this.$toast(res.msg)
     }
@@ -109,4 +116,11 @@ export default {
   width: 100%;
   height: 0.98rem;
 }
+.msg_box{
+       font-size: 0.24rem;
+       color: rgba(0,0,0,.5);
+}
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="下单"></nav-bar>
+    <nav-bar id="reset" title="下单"></nav-bar>
     <div class="width96 flex-box-between" v-show="isShow">
       <div class="adress-box" @click="adressList">
         <div class="font32 textLeft flex-box">
@@ -177,4 +177,7 @@ export default {
   width: 100%;
   height: 0.98rem;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

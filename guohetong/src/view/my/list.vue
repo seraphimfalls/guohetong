@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav-bar title="报单记录"></nav-bar>
+    <nav-bar id="reset" title="报单记录"></nav-bar>
 
     <div class="list-box border-bottom2">
       <span>日期/时间</span>
@@ -62,4 +62,7 @@ export default {
 .list-box span {
   flex: 1;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

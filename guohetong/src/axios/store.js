@@ -189,3 +189,13 @@ export async function getRecommendGoodsList(page, limit){
   })
   return await http.post("/api/User/getRecommendGoodsList", formData)
 }
+//商品确认支付
+export async function goodspay(shopping_order_id,pay_type,images,pay_password) {
+  const formData = createFormData({
+    shopping_order_id,
+    pay_type,
+    images,
+    pay_password
+  });
+  return await http.post("/api/Shoppingorder/pay", formData);
+}

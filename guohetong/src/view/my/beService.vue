@@ -7,12 +7,12 @@
           选择类别
           <select name="level" id=""  v-model = "ProductActive" @change="changeProduct($event)">
             <option value="" selected ref="default_op">请选择类别</option>
-            <option v-for="(item, index) in this.serviceLevelList" :key="index" :value="item.amount">{{item.name}}</option>
+            <option v-for="(item, index) in this.serviceLevelList" @click.native='getIndex(index)' :key="index" :value="index">{{item.name}}</option>
           </select>
         </div>
         <div class="price">
           应支付
-          <div class="price_num">{{this.ProductActive}}</div>
+          <div class="price_num">{{this.amount}}</div>
           元
         </div>
       </div>
@@ -60,16 +60,11 @@
 
       <div class="uploadingbox">
         <span>上传支付凭证</span>
-        <van-form @submit="onSubmit">
-        <van-field name = "uploader" label="文件上传" @change="onSubmit">
-          <template #input>
-            <van-uploader v-model="uploader" />
-          </template>
-        </van-field>
-          <van-button class="upload_btn" round block type="info" native-type="submit">
-        确认上传
-      </van-button>
-        </van-form>
+       <div class="up-box">
+          <van-form @submit="onSubmit">
+            <van-uploader v-model="fileList" preview-size="300" :after-read="afterRead" :max-count="1"/>
+          </van-form>
+        </div>
         <!-- <div class="nonebox">
           +
           <input class="img_btn" type="file" name="image" id="id" @change="shangc($event)" accept="image/jpg, image/jpeg, image/png">
@@ -78,16 +73,15 @@
 
       <button class="en_btn" @click="apply()">确认申请</button>
     </div>
-    <div class="msgbox" v-show = "msgbox">
+    <!-- <div class="msgbox" v-show = "msgbox">
       <div class="msg">
         <span>申请成功</span>
         <van-button @click="changeStyle()">确定</van-button>
       </div>
-    </div>
-    <tab-bar></tab-bar>
-    <div class="alertmsg" v-show="show">
+    </div> -->
+    <!-- <div class="alertmsg" v-show="show">
       <van-button type="info" @click="closemsg">出错！！！</van-button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -119,13 +113,16 @@ export default {
         uploader: [],
         code:'',
         state:'',
-        show: false
+        show: false,
+        image: '',
+        fileList: [],
+        amount:'',
+        level : ''
     }
   },
   async created() {
     const res = await mineApi.getServiceLevelList()
     this.serviceLevelList = res.data
-
     const res2 = await assetsApi.getRechargeConfig()
     this.card_number = res2.data.card_number
     this.alipay_account = res2.data.alipay_account
@@ -137,58 +134,44 @@ export default {
     
   },
   methods: {
-    closemsg(){
-      this.show = false
-    },
+    async afterRead(file) {
+            // 此时可以自行将文件上传至服务器
+            const res = await mineApi.upload(file.file)
+            console.log(res)
+            this.image = res.data.url
+        },
     async onSubmit(values){
-      if(this.uploader.length !=0 ){
-        for(let i = 0 ; i < this.uploader.length; i++){
-          const res = await mineApi.upload(values.uploader[i].file)
-          this.code = res.code
-          this.$toast(res.msg)
+      // if(this.uploader.length !=0 ){
+      //   for(let i = 0 ; i < this.uploader.length; i++){
+      //     const res = await mineApi.upload(values.uploader[i].file)
+      //     this.code = res.code
+      //     this.$toast(res.msg)
+      //   }
+      // }
+    },
+    changeProduct(event){
+      for(let i in this.serviceLevelList){
+        if(i == event.target.value){
+          this.amount = this.serviceLevelList[i].amount
+          this.level = i
+          if(this.ProductActive){
+            this.$refs.default_op.style.display = 'none';
+          }
         }
       }
     },
-    changeProduct(event){
-      this.ProductActive = event.target.value;
-      if(this.ProductActive){
-        this.$refs.default_op.style.display = 'none';
-      }
-    },
-    async apply(type, image){
-      if(this.ProductActive == "服务中心"){
-        const res = await assetsApi.apply(1, this.uploader)
+    async apply(){
+      const res = await assetsApi.apply(this.level, this.image)
+      console.log(res)
+      if(res.code == 1){
         this.$toast(res.msg)
+        setTimeout(()=>{
+          this.$router.go(-1)
+        },1000)
       }else{
-        const res = await assetsApi.apply(2, this.uploader)
         this.$toast(res.msg)
       }
     },
-    changeStyle(){
-      this.$toast("111")
-      console.log(123)
-      // this.msgbox = false;
-      // this.$router.push({path:'/mine'})
-      // setTimeout(()=>{
-      //   this.$router.push({path:'/beService'})
-      // }, 1000)
-    },
-    shangc(e) {
-      let files = document.getElementById("id").files[0];
-      //转码base64
-      let reader = new FileReader();
-      let imgFile;
-      reader.readAsDataURL(files);
-      reader.onload =  e => {
-        imgFile = e.target.result;
-        let arr = imgFile.split(",");
-        // arr[1] 就是图片的 Base64编码字符串
-        
-     	//这里的 picPath 'data:image/png;base64,'+ base64为编码字符串拼接形成图片的
-        this.picPath='data:image/png;base64,'+arr[1]
-        
-      };
-    }
   }
 }
 </script>
@@ -414,5 +397,9 @@ export default {
     }
     #reset /deep/ .van-ellipsis{
 		color: #fff !important;
-	}
+  }
+  .up-box{
+    padding: .2rem;
+    text-align: center;
+  }
 </style>

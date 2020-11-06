@@ -108,7 +108,6 @@ export default {
     // this.firstMobile = this.$route.query.firstMobile;
     this.position = this.$route.query.order;
     const getRes = await mineApi.getAccount();
-    console.log(getRes)
     if (!getRes.code) {
       this.$toast.fail(getRes.msg);
     }

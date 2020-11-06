@@ -8,7 +8,7 @@
       <van-tab title="收益资金" name="2">
         <pige-data></pige-data>
       </van-tab>
-      <van-tab title="复消资金" name="3">
+      <van-tab title="商城积分" name="3">
         <money-data></money-data>
       </van-tab>
     </van-tabs>

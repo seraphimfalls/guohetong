@@ -35,12 +35,12 @@
           <van-button type="info" size="small" @click.stop="pay(item.id)">去支付</van-button>
         </div>
         <div class="list-box-bottom" v-else-if="item.status==2">
-          <van-button
+          <!-- <van-button
             type="primary"
             class="marginR2"
             size="small"
             @click.stop="expressInfo(item.id)"
-          >查看物流</van-button>
+          >查看物流</van-button> -->
           <van-button type="info" size="small" @click.stop="confirm(item.id)">确认收货</van-button>
         </div>
       </div>

@@ -21,7 +21,7 @@
       <div class="property-content">
         <span class="iconfont iconjine marginR2 color2"></span>
         <div>
-          <span class="title width100">复消收益</span>
+          <span class="title width100">商城积分</span>
           <span class="text">{{this.money}}</span>
         </div>
       </div>

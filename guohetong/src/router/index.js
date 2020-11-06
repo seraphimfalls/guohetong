@@ -22,8 +22,6 @@ import buyGold from '@/view/property/buyGold'
 import financial from '@/view/property/financial'
 import moneyList from '@/view/property/moneyList'
 import reward from '@/view/property/reward'
-import scoreTransfer from '@/view/property/scoreTransfer'
-import usdtTransfer from '@/view/property/usdtTransfer'
 import store from '@/view/store/store'
 import sort from '@/view/store/sort'
 import onSale from '@/view/store/onSale'
@@ -277,16 +275,6 @@ export default new Router({
       path: '/pay',
       name: 'pay',
       component: pay
-    },
-    {
-      path: '/scoreTransfer',
-      name: 'scoreTransfer',
-      component: scoreTransfer
-    },
-    {
-      path: '/usdtTransfer',
-      name: 'usdtTransfer',
-      component: usdtTransfer
     },
     {
       path: '/levelup',

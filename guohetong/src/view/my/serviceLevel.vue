@@ -7,7 +7,7 @@
     </div>
     <div class="upbox">
       <span>银行卡:</span>
-      <span>{{this.bankcard}}（国和堂）</span>
+      <span>{{this.bankcard}}</span>
     </div>
     <div class="paywaybox">
         <div>
@@ -45,20 +45,11 @@
 
       <div class="uploadingbox">
         <span>上传支付凭证</span>
-        <van-form @submit="onSubmit">
-        <van-field name = "uploader" label="文件上传" @change="onSubmit">
-          <template #input>
-            <van-uploader v-model="uploader" />
-          </template>
-        </van-field>
-          <van-button class="upload_btn" round block type="info" native-type="submit">
-        确认上传
-      </van-button>
-        </van-form>
-        <!-- <div class="nonebox">
-          +
-          <input class="img_btn" type="file" name="image" id="id" @change="shangc($event)" accept="image/jpg, image/jpeg, image/png">
-        </div> -->
+        <div class="up-box">
+          <van-form @submit="onSubmit">
+            <van-uploader v-model="fileList" preview-size="300" :after-read="afterRead" :max-count="1"/>
+          </van-form>
+        </div>
       </div>
       <button class="en_btn" @click="upgradeService()">确认申请</button>
     </div>
@@ -87,6 +78,7 @@ export default {
   },
   data() {
     return {
+        fileList:[] ,
         region_name: '',
         balance:'',
         levelList:[],
@@ -103,12 +95,14 @@ export default {
         bankcard:'',
         uploader: [],
         code:'',
-        state:''
+        state:'',
+        image: ''
     }
   },
   async created() {
     const res = await mineApi.getAccount();
-    this.balance = res.data.balance
+    const bal = await mineApi.getUpgradeAmount()
+    this.balance = bal.data.upgrade_amount
     this.bankcard = res.data.card_number
     const res2 = await assetsApi.getRechargeConfig();
     this.card_number = res2.data.card_number
@@ -121,14 +115,19 @@ export default {
     
   },
   methods: {
+    async afterRead(file) {
+            // 此时可以自行将文件上传至服务器
+            const res = await mineApi.upload(file.file)
+            this.image = res.data.url
+        },
     async onSubmit(values){
-      if(this.uploader.length !=0 ){
-        for(let i = 0 ; i < this.uploader.length; i++){
-          const res = await mineApi.upload(values.uploader[i].file)
-          this.code = res.code
-          this.$toast(res.msg)
-        }
-      }
+      // if(this.uploader.length !=0 ){
+      //   for(let i = 0 ; i < this.uploader.length; i++){
+      //     const res = await mineApi.upload(values.uploader[i].file)
+      //     this.code = res.code
+      //     this.$toast(res.msg)
+      //   }
+      // }
     },
     changeStyle(){
       this.msgbox = false;
@@ -143,7 +142,7 @@ export default {
       }
     },
     async upgradeService(images){
-      const res = await assetsApi.upgradeService(this.inputval, this.file)
+      const res = await assetsApi.upgradeService( this.image)
       this.$toast(res.msg)
       setTimeout(()=>{
         this.$router.push({path:'/mine'})
@@ -366,5 +365,9 @@ export default {
     }
     #reset /deep/ .van-ellipsis{
 		color: #fff !important;
-	}
+  }
+  .up-box{
+    padding: .2rem;
+    text-align: center;
+  }
 </style>

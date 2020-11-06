@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar :title="title" class="dqjt-nav">
+  <van-nav-bar id='reset' :title="title" class="dqjt-nav">
     <van-icon name="arrow-left" slot="left"  @click="goBack" v-show="flag" />
   </van-nav-bar>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   created() {
     if (
-      this.$route.path == "/home" || this.$route.path == "/" || this.$route.path == "/share" || this.$route.path=="/property" || this.$route.path=="/store"
+      this.$route.path == "/home" || this.$route.path == "/" || this.$route.path == "/backlog" || this.$route.path=="/mine"
      
     ) {
       this.flag = false;
@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang='less' scoped>
 .dqjt-nav{
     background: #59a4fe;
 }
@@ -43,4 +43,7 @@ export default {
 .van-icon-arrow-left{
     color:#fff !important;
 }
+#reset /deep/ .van-ellipsis{
+		color: #fff !important;
+	}
 </style>

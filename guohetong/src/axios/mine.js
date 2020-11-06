@@ -81,3 +81,10 @@ export async function getWXServiceConfig(level){
   })
   return await http.post("/api/Index/getWXServiceConfig", formData)
 }
+//获取升级加盟店的费用
+export async function getUpgradeAmount(){
+  const formData = createFormData({
+    
+  })
+  return await http.post("/api/Index/getUpgradeAmount", formData)
+}

@@ -113,12 +113,20 @@ export default {
 
     const productRes = await storeApi.getRecommendGoodsList();
     this.listData = productRes.data;
+    console.log(productRes)
     // console.log(this.listData)
     // const priceRes = await homeApi.getPIGEPrice();
     // this.price = priceRes.data.pige_price;
   },
 
   methods: {
+    getDetail(id){
+      let info = {
+        id: id
+      }
+      sessionStorage.setItem('info', JSON.stringify(info));
+      this.$router.push({path: '/goodsDetail'})
+    },
     overlayShow() {
       this.show = false;
     },

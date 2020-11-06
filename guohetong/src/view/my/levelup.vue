@@ -10,12 +10,12 @@
         选择会员等级
         <select name="level" id=""  v-model = "ProductActive" @change="changeProduct($event)">
           <option value="" selected ref="default_op">请选择会员等级</option>
-          <option v-for="(item, index) in this.levelList" :key="index" :value="item.difference">{{item.name}}</option>
+          <option v-for="(item, index) in this.levelList" @click.native="getIndex(index)" :key="index" :value="index">{{item.name}}</option>
         </select>
       </div>
       <div class="price">
         补差价
-        <div class="price_num">{{this.ProductActive}}</div>
+        <div class="price_num">{{this.difference}}</div>
         元
       </div>
       <button class="en_btn" @click="levelup()">确认升级</button>
@@ -52,6 +52,8 @@ export default {
         difference:'',
         ProductActive:"",
         msgbox:'',
+        key:'',
+        level:'',
         show: false
     }
   },
@@ -70,30 +72,25 @@ export default {
       this.show = false
     },
     changeProduct(event){
-      this.ProductActive = event.target.value;
-      if(this.ProductActive){
-        this.$refs.default_op.style.display = 'none';
+      for(let i in this.levelList){
+        if(i == event.target.value){
+          this.difference = this.levelList[i].difference
+          this.level = i
+          if(this.ProductActive){
+            this.$refs.default_op.style.display = 'none';
+          }
+        }
       }
+      
     },
     async levelup(){
-      if(this.ProductActive == 8000){
-        const res = await mineApi.upgrade(2)
+      const res = await mineApi.upgrade(this.level)
+      if(res.code == 1){
         this.$toast(res.msg)
-        setTimeout(()=>
-          this.$router.push({
-            path: "/mine"
-          }),1000)
-        // if(res){this.msgbox = true;}
-      }else if(this.ProductActive == 28000){
-        const res = await mineApi.upgrade(3)
-        this.$toast(res.msg)
-        setTimeout(()=>
-          this.$router.push({
-            path: "/mine"
-          }),1000)
-        // if(res){this.msgbox = true;}
+        setTimeout(()=>{
+          this.$router.go(-1)
+        },3000)
       }else{
-        const res = await mineApi.upgrade(0)
         this.$toast(res.msg)
       }
     },
